@@ -1,0 +1,110 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based coping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+host: "api.northeastern.edu"
+
+basePath: "/admin"
+schemes:
+    - "https"
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in:   header
+consumes:
+    - "application/json"
+produces:
+    - "application/json"
+
+# This is your document metadatan
+info:
+  version: "0.0.1"
+  title: Admin
+  description: |
+    This api provides an administrative interface to manage data related to campus buildings at northeastern.
+    The caller can supply a code and a name along with offset and pagesize.
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /building:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `Building` objects.
+
+        Opetional query param of **code** determines the list of building returned based on a code
+
+        Optional query param of **name** determines the list of building returned based on a name
+
+        Optional query param of **offset** returns the list of buildings started from the offset
+
+        Optional query param of **pagesize** returns the list of buildings started from the offset
+
+      #    # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is require
+        -
+          name: code
+          in: query
+          description: building code
+          required: false
+          type: string
+        -
+          name: name
+          in: query
+          description: building name
+          required: false
+          type: string
+        -
+          name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        -
+          name: pagesize
+          in: query
+          description: pagesize
+          required: false
+          type: string
+        -
+          name: Authorization
+          in: header
+          description: Bearer <token>
+          type: string
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: Successful response
+          # A schema describing your response object.
+          # Use JSON Schema format
+          schema:
+            title: ArrayOfBuilding
+            type: array
+            items:
+              title: building
+              type: object
+              properties:
+                rnum:
+                  type: string
+                code:
+                  type: string
+                name:
+                  type: string
+                lati:
+                  type: string
+                longi:
+                  type: string
+                mlati:
+                  type: string
+                mlongi:
+                  type: string
+                xlati:
+                  type: string
+                xlongi:
+                  type: string
